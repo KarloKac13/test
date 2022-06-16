@@ -19,6 +19,7 @@ export default {
     }
   },
   methods: {
+    // test 3
     loginButton(cmp) {
       this.selectedComponent = cmp
     }
