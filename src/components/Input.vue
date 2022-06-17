@@ -49,7 +49,7 @@ export default {
         }
     },
     methods: {
-       async loginButton() {
+          loginButton() {
             if (this.user.email.trim() === "" && this.user.password.trim() === "") {
                 alert("Unesite svoju e-mail adresu/korisničko ime i svoju lozinku")
             } else if (this.user.email.trim() === "") {
@@ -59,7 +59,7 @@ export default {
             } else if (this.user.email.trim().toLowerCase() === this.email.toLowerCase() && parseInt(this.user.password.trim()) === this.password) {
 
                 // alert("Bravo, oba popunjena");
-                await fetch('http://restapi.adequateshop.com/api/authaccount/login', {
+                fetch('http://restapi.adequateshop.com/api/authaccount/login', {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -70,41 +70,12 @@ export default {
                     }),
                 })
                     .then((response) => response.json())
-                    .then((result) =>  {
-                        const info = result;
-                        console.log(info)
-                        let data = "data";
-                        let name = "Name"
-                        let token = "Token"
-
-                        for (let i in info) {
-                            if (i === data) {
-                                let info3 = info[i];
-                                for (let j in info3) {
-                                    if (j === name) {
-                                        let objName = info3[j];
-                                        alert("Welcome" + " " + objName);
-                                    }
-                                }
-                            }
-                        }
-
-                        for (let i in info) {
-                            if (i === data) {
-                                let info2 = info[i];
-                                for (let j in info2) {
-                                    if (j === token) {
-                                        let objToken = info2[j];
-                                        console.log(objToken)
-                                        localStorage.setItem("token", objToken)
-                                       
-                                    }
-                                }
-                            }
-                        }
-                         
+                    .then((result) => {
+                        console.log(result)
+                        localStorage.setItem("token", result.data.Token);
+                        alert("Welcome" + " " + result.data.Name);
                     })
-                    .then(this.$emit("switchComp", "getAllUsers")) 
+                    .then (this.$emit("switchComp", "getAllUsers")) 
                     .catch((error) => console.log("error", error));
             }
 

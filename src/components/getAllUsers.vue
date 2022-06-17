@@ -1,11 +1,8 @@
 <template>
     <div>
-        <ul class="li">
-            <li v-for="name in dataName" :key="name"> {{name}}
-            </li>
-            <li> 
-            </li>
-            <li>
+        <ul>
+            <li 
+            v-for="data in dataInfo" :key="data"> {{data}}
             </li>
         </ul>
     </div>
@@ -15,46 +12,22 @@
 export default {
     data() {
         return {
-            dataName: [],
+            dataInfo: []
         }
     },
-    created() {
-        fetch("http://restapi.adequateshop.com/api/users?page=1", {
-            headers: {
+    async created() {
+        await fetch("http://restapi.adequateshop.com/api/users?page=1", {
+             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem("token")}`,
             }
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log(result);
-                const data = result;
-                let obj1 = "data";
-
-                for (let i in data) {
-                    if (i === obj1) {
-                        let a = data[i];
-                        console.log(a);
-                        for (let j in a) {
-                            let b = a[j];
-                            console.log(b)
-                            for (let k in b) {
-                                if (k === "name") {
-                                    let name = b[k];
-                                    console.log(name)
-                                    this.dataName.push(name)
-                                } if (k === "email") {
-                                    let email = b[k];
-                                    console.log(email)
-                                    this.dataName.push(email)
-                                } if (k === "location") {
-                                    let location = b[k];
-                                    console.log(location)
-                                    this.dataName.push(location)
-                                }
-                            }
-                        }
-                    }
+                for (let i in result.data) {
+                        this.dataInfo.push(result.data[i].name)
+                        this.dataInfo.push(result.data[i].email)
+                        this.dataInfo.push(result.data[i].location)
                 }
             })
             .catch((error) => console.log("error", error))
@@ -64,11 +37,8 @@ export default {
 </script>
 
 <style scoped>
-.li {
-    background-color: aliceblue;
-    display: flex;
-    flex-flow: column;
-    color:rgb(223, 64, 64)
+li {
+    padding-top: 10px;
+    list-style: none;
 }
-
 </style>
