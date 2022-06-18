@@ -1,20 +1,17 @@
 <template>
 
 
-<!--Managed to refactor some code
+<!--
+  
+  Managed to refactor more code
+
+One issue left: 
 
 Fetch GET not fixed. It still gets executed before POST sometimes
 For loop in getAllUsers is not displayed properly
 
-( Name:
-  Email:
-  Location: 
- 
-  Name:
-  Email:
-  Location:
- 
-  etc.) -->
+
+ -->
 
   <!-- <the-input ></the-input>
   <get-all-users></get-all-users> -->
