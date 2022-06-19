@@ -5,7 +5,9 @@
   Fetch GET not fixed. It still gets executed before POST sometimes
   For loop in getAllUsers is not displayed properly -->
 
-  <the-input @loginSuccess="loginSuccess"></the-input>
+  <the-input 
+  @loginSuccess="loginSuccess"
+  v-if="!isLoggedIn"></the-input>
   <get-all-users v-if="isLoggedIn"></get-all-users>
 </template>
 
