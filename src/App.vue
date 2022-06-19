@@ -1,21 +1,12 @@
 <template>
+  <!-- Managed to refactor more code
+  One issue left: 
 
+  Fetch GET not fixed. It still gets executed before POST sometimes
+  For loop in getAllUsers is not displayed properly -->
 
-<!--
-  
-  Managed to refactor more code
-
-One issue left: 
-
-Fetch GET not fixed. It still gets executed before POST sometimes
-For loop in getAllUsers is not displayed properly
-
-
- -->
-
-  <!-- <the-input ></the-input>
-  <get-all-users></get-all-users> -->
-  <component @switchComp="loginButton" :is="selectedComponent" ></component>
+  <the-input @loginSuccess="loginSuccess"></the-input>
+  <get-all-users v-if="isLoggedIn"></get-all-users>
 </template>
 
 <script>
@@ -29,12 +20,13 @@ export default {
   },
   data() {
     return {
-      selectedComponent: "TheInput"
+      isLoggedIn: false,
     }
   },
   methods: {
-    loginButton(cmp) {
-      this.selectedComponent = cmp
+    loginSuccess() {
+      console.log('login success');
+      this.isLoggedIn = true;
     }
   }
 };
