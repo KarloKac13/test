@@ -1,38 +1,7 @@
 <template>
-  <!-- Managed to refactor more code
-  One issue left: 
-
-  Fetch GET not fixed. It still gets executed before POST sometimes
-  For loop in getAllUsers is not displayed properly -->
-
-  <the-input 
-  @loginSuccess="loginSuccess"
-  v-if="!isLoggedIn"></the-input>
-  <get-all-users v-if="isLoggedIn"></get-all-users>
+  <!-- Added router and somekind of basic nav guard -->
+  <router-view></router-view>
 </template>
-
-<script>
-import TheInput from "./components/Input.vue";
-import getAllUsers from "./components/getAllUsers.vue"
-
-export default {
-  components: {
-    TheInput,
-    getAllUsers
-  },
-  data() {
-    return {
-      isLoggedIn: false,
-    }
-  },
-  methods: {
-    loginSuccess() {
-      console.log('login success');
-      this.isLoggedIn = true;
-    }
-  }
-};
-</script>
 
 <style>
 @font-face{

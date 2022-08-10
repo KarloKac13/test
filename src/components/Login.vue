@@ -37,7 +37,7 @@
 
     <button
       class="btn borderRadius defaultFontSize itmSize transparent cursor"
-      @click.enter="loginButton()"
+      @click="loginButton"
     >
       Login
     </button>
@@ -45,7 +45,7 @@
     <button
       type="button"
       class="defaultFontSize borderRadius itmSize googleSignIn cursor textColor"
-      @click="googleLogin"
+      @click="googleLogin()"
     >
       <img class="inputLogoSize" src="googleicon2.jpg" /> Or sign-in with Google
     </button>
@@ -111,15 +111,22 @@ export default {
             // if token exists set it as current token in the local storage and emit login success event
             if (Token) {
                 localStorage.setItem("token", Token);
-                this.$emit("loginSuccess");
+                this.$router.replace("/users");
             } else {
-                console.log("think of an error handling method")
+              console.log("think of an error handling method");
             }
         }
     },
     googleLogin() {
     alert("Google login...not a member yet!")
-    },
+  },
+
+  // beforeRouteLeave(_, _2, next) {
+  //   if (this.user.email.trim() !== "" || this.user.password.trim() !== "") {
+  //     const loginWarning = confirm("Are you sure you want to leave?");
+  //     next(loginWarning)
+  //     }
+  //   }
 }
 </script>
 

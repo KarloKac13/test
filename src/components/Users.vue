@@ -18,7 +18,7 @@ export default {
     },
     async created() {
         await fetch("http://restapi.adequateshop.com/api/users?page=1", {
-             headers: {
+            headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem("token")}`,
             }
@@ -30,7 +30,7 @@ export default {
                 // we just assign result to data info
                 this.users = result.data;
             })
-            .catch((error) => console.log("error", error))
+            .catch((error) => console.log("error", error));
     }
 } 
 
